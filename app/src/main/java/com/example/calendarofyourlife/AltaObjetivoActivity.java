@@ -1,10 +1,6 @@
 package com.example.calendarofyourlife;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -13,61 +9,32 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
-public class MainActivity extends AppCompatActivity {
+public class AltaObjetivoActivity extends AppCompatActivity {
 
-    FloatingActionButton altaObj;
-
-    Button btnDiaIni, btnDiaFin, btnColor, btnCrearObj;
-
+    Button btnDiaIni, btnDiaFin, btnColor;
     EditText DiaIni, DiaFin;
-    private int dia,mes,anio, defaultcolor, SemanaIni, SemanaFin;
 
-    ColorStateList colorStateList;
+    private int dia,mes,anio, defaultcolor;
 
-    RadioButton rdo_1_1;
-
-    RadioButton[][] radioButtons = new RadioButton[100][52];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_alta_objetivo);
 
-        altaObj =(FloatingActionButton) findViewById(R.id.altaObj);
-
-        rdo_1_1 =(RadioButton) findViewById(R.id.rdo_1_1);
-
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 52; j++) {
-                int id = getResources().getIdentifier("rdo_" + (i+1) + "_" + (j+1), "id", getPackageName());
-                radioButtons[i][j] = findViewById(id);
-            }
-        }
-
-        altaObj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                interfazAltaObj();
-            }
-        });
-    }
-
-    public void interfazAltaObj(){
-        Dialog popup = new Dialog(this);
-        popup.setContentView(R.layout.activity_alta_objetivo);
-
-        btnDiaIni =(Button) popup.findViewById(R.id.btnDiaIni);
-        DiaIni =(EditText) popup.findViewById(R.id.DiaIni);
-        btnDiaFin =(Button) popup.findViewById(R.id.btnDiaFin);
-        DiaFin =(EditText) popup.findViewById(R.id.DiaFin);
-        btnColor =(Button) popup.findViewById(R.id.btnColor);
-        btnCrearObj =(Button) popup.findViewById(R.id.btnRegistrar);
+        btnDiaIni =(Button) findViewById(R.id.btnDiaIni);
+        DiaIni =(EditText) findViewById(R.id.DiaIni);
+        btnDiaFin =(Button) findViewById(R.id.btnDiaFin);
+        DiaFin =(EditText) findViewById(R.id.DiaFin);
+        btnColor =(Button) findViewById(R.id.btnColor);
 
         btnDiaIni.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,24 +52,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) { Color(); }
         });
-
-        popup.show();
-        btnCrearObj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popup.dismiss();
-            }
-        });
-    }
-
-    public void IrIniciarSesion(View View){
-        Intent i = new Intent(this,IniciarSesionActivity.class);
-        startActivity(i);
-    }
-
-    public void IrRegistro(View View){
-        Intent i = new Intent(this,RegistrarActivity.class);
-        startActivity(i);
     }
 
     public void DiaIni() {
@@ -114,13 +63,12 @@ public class MainActivity extends AppCompatActivity {
         DatePickerDialog datepickerdialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                DiaIni.setText((dayOfMonth)+"/"+(month+1)+"/"+(year));
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
-                SemanaIni = selectedDate.get(Calendar.WEEK_OF_YEAR);
-                DiaIni.setText(SemanaIni+"");
             }
         }
-                ,anio,mes,dia);
+                ,dia,mes,anio);
         datepickerdialog.show();
     }
 
@@ -135,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
-                SemanaFin = selectedDate.get(Calendar.WEEK_OF_YEAR);
-                DiaFin.setText(SemanaFin+"");
+                DiaFin.setText((dayOfMonth)+"/"+(month+1)+"/"+(year));
             }
         }
-                ,anio,mes,dia);
+                ,dia,mes,anio);
         datepickerdialog.show();
     }
 
@@ -153,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 defaultcolor = color;
-                colorStateList = new ColorStateList(
+                ColorStateList colorStateList = new ColorStateList(
                         new int[][]
                                 {
                                         new int[]{-android.R.attr.state_enabled}, // Disabled
@@ -165,20 +112,10 @@ public class MainActivity extends AppCompatActivity {
                                         defaultcolor   // enabled
                                 }
                 );
-                int total_semanas = SemanaFin - SemanaIni;
-                int semana = 0, anio = 0;
-                for (int i = 0; i < total_semanas; i++){
-                    if (semana > 51){
-                        anio++;
-                        semana = 0;
-                    }
-                    radioButtons[anio][semana].setButtonTintList(colorStateList);
-                    semana++;
-                }
+                //RB1.setButtonTintList(colorStateList);
             }
         });
-
         ambilWarnaDialog.show();
-    }
 
+    }
 }
