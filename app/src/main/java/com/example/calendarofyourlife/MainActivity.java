@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,10 @@ import android.widget.RadioButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.Calendar;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -56,6 +61,28 @@ public class MainActivity extends AppCompatActivity {
                 interfazAltaObj();
             }
         });
+
+
+
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        long totalWeeks = prefs.getLong("weeks", 0);
+
+        int weeksCount = 0;
+        // Recorrer todos los años y semanas y marcar los radio buttons correspondientes
+        for (int year = 1; year <= 100 && weeksCount < totalWeeks; year++) {
+            for (int week = 1; week <= 52 && weeksCount < totalWeeks; week++) {
+                // Obtener el ID del radio button correspondiente al año y la semana actual
+                int radioButtonId = getResources().getIdentifier("rdo_" + year + "_" + week, "id", getPackageName());
+                // Marcar el radio button como seleccionado
+                RadioButton radioButton = findViewById(radioButtonId);
+                radioButton.setChecked(true);
+                weeksCount++;
+            }
+        }
+
+
+
+
     }
 
     public void interfazAltaObj(){
@@ -181,4 +208,22 @@ public class MainActivity extends AppCompatActivity {
         ambilWarnaDialog.show();
     }
 
+    private int getWeeksForYearAndWeek(int year, int week) {
+        // Asumiendo que el primer día de la semana es Lunes
+        LocalDate date = LocalDate.of(year, 1, 1).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        int weeks = 0;
+        while (date.getYear() <= year) {
+            if (date.getYear() == year && date.get(WeekFields.ISO.weekOfWeekBasedYear()) > week) {
+                break;
+            }
+            weeks++;
+            date = date.plusWeeks(1);
+        }
+        return weeks;
+    }
+    private int getWeeksForYear(int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        return calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);
+    }
 }
