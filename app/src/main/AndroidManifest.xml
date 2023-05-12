@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalendarOfYourLife">
         <activity
+            android:name=".ModificarObjetivoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistrarActivity"
             android:exported="true">
             <intent-filter>
@@ -23,8 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".AltaObjetivoActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
