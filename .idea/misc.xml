@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/drawable/radio_button_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/radio_button_inset.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_iniciar_sesion.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_registrar.xml" value="0.17481884057971014" />
       </map>
     </option>
   </component>
