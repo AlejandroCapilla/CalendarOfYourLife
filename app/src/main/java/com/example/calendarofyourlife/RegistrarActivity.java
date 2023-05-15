@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 public class RegistrarActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String MY_CHANNEL_ID = "myChannel";
     Button btnFechaNacimiento;
     EditText FechaNacimiento;
     private int dia,mes,anio;
@@ -34,7 +35,10 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
         btnmain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+
+               // RegistrarActivityNotification miclase = new RegistrarActivityNotification();
+
+                Intent intent = new Intent(RegistrarActivity.this, Notifications.class);
                 startActivity(intent);
             }
         });
