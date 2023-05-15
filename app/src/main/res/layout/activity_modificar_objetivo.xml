@@ -16,7 +16,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <Button
-            android:id="@+id/btnColor"
+            android:id="@+id/btnColorM"
             android:layout_width="387dp"
             android:layout_height="68dp"
             android:text="Elegir Color" />
@@ -24,7 +24,7 @@
 
 
     <LinearLayout
-        android:layout_width="mathch_parent"
+        android:layout_width="match_parent"
         android:layout_height="82dp"
         android:layout_marginTop="80dp"
         android:gravity="center"
@@ -35,16 +35,17 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnGuardarM"
             android:layout_width="150dp"
             android:layout_height="68dp"
             android:text="Guardar Objetivo" />
 
         <Space
-            android:layout_width="30" />
+            android:layout_width="30px"
+            android:layout_height="0px"/>
 
         <Button
-            android:id="@+id/btnEliminar"
+            android:id="@+id/btnEliminarM"
             android:layout_width="150dp"
             android:layout_height="68dp"
             android:text="Eliminar Objetivo"
@@ -83,7 +84,7 @@
         app:layout_constraintVertical_bias="0.5">
 
         <EditText
-            android:id="@+id/objetivo"
+            android:id="@+id/objetivoM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -96,14 +97,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnDiaIni"
+                android:id="@+id/btnDiaIniM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Primer dia Objetivo"/>
 
             <EditText
-                android:id="@+id/DiaIni"
+                android:id="@+id/DiaIniM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,14 +121,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnDiaFin"
+                android:id="@+id/btnDiaFinM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ultimo dia Objetivo" />
 
             <EditText
-                android:id="@+id/DiaFin"
+                android:id="@+id/DiaFinM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
